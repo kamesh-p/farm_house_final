@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async thunk to fetch the order data
 export const getOrderData = createAsyncThunk("order/getOrderData", async () => {
   try {
     const response = await fetch(
@@ -47,6 +46,6 @@ const orderSlice = createSlice({
 });
 
 export const orderReducer = orderSlice.reducer;
-export const {} = orderSlice.actions; // No additional actions defined
+// export const {} = orderSlice.actions;
 
 export default orderSlice.actions;

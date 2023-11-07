@@ -13,6 +13,7 @@ import SpecialOffer from "./components/SpecialOffer";
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const [cartAnimation, setCartAnimation] = useState(false);
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   // const product = useSelector((state) => state.product.productData);
   // console.log("ppp", product);
@@ -33,26 +34,53 @@ const App = () => {
 
   const addToCart = (data) => {
     setCart([...cart, { ...data, quantity: 1 }]);
+    setCartAnimation(true);
+
+    setTimeout(() => {
+      setCartAnimation(false);
+    }, 500);
   };
 
   const handleDecrease = (index) => {
     const updatedCart = [...cart];
-    const currentQuantity = updatedCart[index].Quantity;
-    updatedCart[index].Quantity = currentQuantity + 1;
+    // const currentQuantity = updatedCart[index].Quantity;
+    // updatedCart[index].Quantity = currentQuantity + 1;
     if (updatedCart[index].quantity > 1) {
       updatedCart[index].quantity--;
     } else {
-      updatedCart.splice(index, 1); // Remove the item from the cart
+      updatedCart.splice(index, 1);
     }
 
     setCart(updatedCart);
     updateTotalPrice(updatedCart);
+    // const { Quantity } = updatedCart[index];
+    // postQuantityToDatabase(Quantity);
   };
+  // const postQuantityToDatabase = async (Quantity) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://add-to-card-a30ca-default-rtdb.firebaseio.com/Products.json`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ Quantity }),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to update quantity in the database.");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleIncrease = (index) => {
     const updatedCart = [...cart];
     const currentquantity = updatedCart[index].quantity;
-    const currentQuantity = updatedCart[index].Quantity;
+    // const currentQuantity = updatedCart[index].Quantity;
 
     if (currentquantity < 10) {
       updatedCart[index].quantity = currentquantity + 1;
@@ -60,12 +88,14 @@ const App = () => {
       updateTotalPrice(updatedCart);
     }
 
-    if (currentQuantity > 1) {
-      // Check if the current quantity is greater than 1
-      updatedCart[index].Quantity = currentQuantity - 1; // Decrease the quantity by 1
-      setCart(updatedCart);
-      updateTotalPrice(updatedCart);
-    }
+    // if (currentQuantity > 1) {
+    //   // Check if the current quantity is greater than 1
+    //   // updatedCart[index].Quantity = currentQuantity - 1; // Decrease the quantity by 1
+    //   setCart(updatedCart);
+    //   updateTotalPrice(updatedCart);
+    // }
+    // const { Quantity } = updatedCart[index];
+    // postQuantityToDatabase(Quantity);
   };
 
   const updateTotalPrice = (updatedCart) => {
@@ -98,6 +128,7 @@ const App = () => {
               <Header
                 handleRouteChange={handleRouteChange}
                 count={cart.length}
+                cartAnimation={cartAnimation}
               />
               <Routes>
                 <Route
@@ -119,7 +150,7 @@ const App = () => {
                 <Route path="/admin/feedback" element={<FeedbackForm />} />
                 <Route path="/admin/history" element={<History />} />
                 <Route
-                  path="/admin/"
+                  path="/"
                   element={<ProductList addToCart={addToCart} />}
                 />
                 <Route

@@ -19,7 +19,7 @@
   background-color: black;
   color: #fff;
   width: 150px;
-  margin: 50px auto 50px auto;
+  margin: 50px auto 0px auto;
 }
 
 .Shop-flex {
@@ -79,4 +79,8 @@
 }
 .on-stock {
   color: green;
+}
+.shop-search-products {
+  margin-left: 900px;
+  margin-top: 40px;
 }

@@ -93,3 +93,28 @@
 ul {
   align-items: center;
 }
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.cart-animation {
+  animation: shake 0.5s ease-in-out;
+}
+.cart-icon {
+  height: 27px;
+  width: 35px;
+}

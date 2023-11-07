@@ -1,11 +1,16 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../contexts/logUser";
 import "./FeedBack.css";
-
+import { useSelector } from "react-redux";
 const FeedbackForm = ({ classification }) => {
   const [feedback, setFeedback] = useState("");
   const { loggedInUserName } = useContext(AuthContext);
-
+  const orderData = useSelector((state) =>
+    state.order.orderData.filter(
+      (order) => order.allowedUser === loggedInUserName
+    )
+  );
+  console.log("ooo", orderData);
   const handleFeedbackChange = (e) => {
     setFeedback(e.target.value);
   };

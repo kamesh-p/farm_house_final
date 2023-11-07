@@ -55,6 +55,12 @@
 .subscription-offers {
   margin-top: 20px;
   margin-left: 100px;
+  /* border: 1px solid rgb(165, 165, 165); */
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 30px;
+  height: 280px;
+  background-color: #e9e9e9;
 }
 
 .subscription-offers h3 {
@@ -125,4 +131,9 @@ p {
 .total-price-discount-og {
   margin-left: 60px;
   color: black;
+}
+.li-special-offer-timeout {
+  color: green !important;
+  /* text-shadow: #888 !important; */
+  font-weight: bold;
 }

@@ -32,13 +32,13 @@ function ProductList({ addToCart }) {
     counts[name] = (counts[name] || 0) + 1;
     return counts;
   }, {});
-  console.log("cc", productCounts);
+
   const sortedCartItems = Object.entries(productCounts).sort(
     (a, b) => b[1] - a[1]
   );
-  console.log("sorted", sortedCartItems);
+
   const topProducts = sortedCartItems.slice(0, 30).map((item) => item[0]);
-  console.log("top", topProducts);
+
   const filteredProducts = product.filter((productItem) =>
     topProducts.includes(productItem.name)
   );
@@ -70,7 +70,6 @@ function ProductList({ addToCart }) {
     .sort((a, b) => b.count - a.count)
     .slice(0, 4); // Filter to top 4 items
 
-  console.log("work", meatProducts);
   const handleAddToCart = (productItem) => {
     addToCart(productItem);
     setClickedButtons((prevButtons) => [...prevButtons, productItem.id]);
@@ -105,108 +104,131 @@ function ProductList({ addToCart }) {
         </Container>
       </section>
 
-      <div id="Suggested Products" className="ProductList-product-section">
-        <h2 className="bsp">Suggested Products</h2>
-        <h2 className="segment-suggested-products">Top Meat Products</h2>
-        <div className="ProductList-product-row">
-          {meatProducts.map((productItem) => (
-            <div className="ProductList-product-item" key={productItem.id}>
-              <img src={productItem.url} alt="img" />
-              <p>
-                {productItem.name} | {productItem.classification}
-                {productItem.Quantity === 0 ? (
-                  <p className="out-of-stock">Out of Stock</p>
-                ) : productItem.Quantity < 10 ? (
-                  <p className="limited-stock">Limited Stock</p>
-                ) : (
-                  <p className="on-stock"> Stock Available</p>
-                )}
-              </p>
-              <p>{productItem.category}</p>
-              <p>Rs. {productItem.price} /-</p>
-              <button
-                onClick={() => handleAddToCart(productItem)}
-                disabled={productItem.Quantity === 0}
-                className={
-                  clickedButtons.includes(productItem.id) ? "clicked" : ""
-                }
-              >
-                {clickedButtons.includes(productItem.id)
-                  ? "Added"
-                  : "Add To Cart"}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+      {(meatProducts.length > 0 ||
+        dairyProducts.length > 0 ||
+        foodProducts.length > 0) && (
+        <div id="SuggestedProducts" className="ProductList-product-section">
+          <h2 className="bsp">Suggested Products</h2>
 
-      <div className="ProductList-product-section">
-        <h2 className="segment-suggested-products">Top Dairy Products</h2>
-        <div className="ProductList-product-row">
-          {dairyProducts.map((productItem) => (
-            <div className="ProductList-product-item" key={productItem.id}>
-              <img src={productItem.url} alt="img" />
-              <p>
-                {productItem.name} | {productItem.classification}
-                {productItem.Quantity === 0 ? (
-                  <p className="out-of-stock">Out of Stock</p>
-                ) : productItem.Quantity < 10 ? (
-                  <p className="limited-stock">Limited Stock</p>
-                ) : (
-                  <p className="on-stock"> Stock Available</p>
-                )}
-              </p>
-              <p>{productItem.category}</p>
-              <p>Rs. {productItem.price} /-</p>
-              <button
-                onClick={() => handleAddToCart(productItem)}
-                disabled={productItem.Quantity === 0}
-                className={
-                  clickedButtons.includes(productItem.id) ? "clicked" : ""
-                }
-              >
-                {clickedButtons.includes(productItem.id)
-                  ? "Added"
-                  : "Add To Cart"}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+          {meatProducts.length > 0 && (
+            <>
+              <h2 className="segment-suggested-products">Top Meat Products</h2>
+              <div className="ProductList-product-row">
+                {meatProducts.map((productItem) => (
+                  <div
+                    className="ProductList-product-item"
+                    key={productItem.id}
+                  >
+                    <img src={productItem.url} alt="img" />
+                    <p>
+                      {productItem.name} | {productItem.classification}
+                      {productItem.Quantity === 0 ? (
+                        <p className="out-of-stock">Out of Stock</p>
+                      ) : productItem.Quantity < 10 ? (
+                        <p className="limited-stock">Limited Stock</p>
+                      ) : (
+                        <p className="on-stock"> Stock Available</p>
+                      )}
+                    </p>
+                    <p>{productItem.category}</p>
+                    <p>Rs. {productItem.price} /-</p>
+                    <button
+                      onClick={() => handleAddToCart(productItem)}
+                      disabled={productItem.Quantity === 0}
+                      className={
+                        clickedButtons.includes(productItem.id) ? "clicked" : ""
+                      }
+                    >
+                      {clickedButtons.includes(productItem.id)
+                        ? "Added"
+                        : "Add To Cart"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
 
-      <div className="ProductList-product-section">
-        <h2 className="segment-suggested-products">Top Food Products</h2>
-        <div className="ProductList-product-row">
-          {foodProducts.map((productItem) => (
-            <div className="ProductList-product-item" key={productItem.id}>
-              <img src={productItem.url} alt="img" />
-              <p>
-                {productItem.name} | {productItem.classification}
-                {productItem.Quantity === 0 ? (
-                  <p className="out-of-stock">Out of Stock</p>
-                ) : productItem.Quantity < 10 ? (
-                  <p className="limited-stock">Limited Stock</p>
-                ) : (
-                  <p className="on-stock"> Stock Available</p>
-                )}
-              </p>
-              <p>{productItem.category}</p>
-              <p>Rs. {productItem.price} /-</p>
-              <button
-                onClick={() => handleAddToCart(productItem)}
-                disabled={productItem.Quantity === 0}
-                className={
-                  clickedButtons.includes(productItem.id) ? "clicked" : ""
-                }
-              >
-                {clickedButtons.includes(productItem.id)
-                  ? "Added"
-                  : "Add To Cart"}
-              </button>
-            </div>
-          ))}
+          {dairyProducts.length > 0 && (
+            <>
+              <h2 className="segment-suggested-products">Top Dairy Products</h2>
+              <div className="ProductList-product-row">
+                {dairyProducts.map((productItem) => (
+                  <div
+                    className="ProductList-product-item"
+                    key={productItem.id}
+                  >
+                    <img src={productItem.url} alt="img" />
+                    <p>
+                      {productItem.name} | {productItem.classification}
+                      {productItem.Quantity === 0 ? (
+                        <p className="out-of-stock">Out of Stock</p>
+                      ) : productItem.Quantity < 10 ? (
+                        <p className="limited-stock">Limited Stock</p>
+                      ) : (
+                        <p className="on-stock"> Stock Available</p>
+                      )}
+                    </p>
+                    <p>{productItem.category}</p>
+                    <p>Rs. {productItem.price} /-</p>
+                    <button
+                      onClick={() => handleAddToCart(productItem)}
+                      disabled={productItem.Quantity === 0}
+                      className={
+                        clickedButtons.includes(productItem.id) ? "clicked" : ""
+                      }
+                    >
+                      {clickedButtons.includes(productItem.id)
+                        ? "Added"
+                        : "Add To Cart"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {foodProducts.length > 0 && (
+            <>
+              <h2 className="segment-suggested-products">Top Food Products</h2>
+              <div className="ProductList-product-row">
+                {foodProducts.map((productItem) => (
+                  <div
+                    className="ProductList-product-item"
+                    key={productItem.id}
+                  >
+                    <img src={productItem.url} alt="img" />
+                    <p>
+                      {productItem.name} | {productItem.classification}
+                      {productItem.Quantity === 0 ? (
+                        <p className="out-of-stock">Out of Stock</p>
+                      ) : productItem.Quantity < 10 ? (
+                        <p className="limited-stock">Limited Stock</p>
+                      ) : (
+                        <p className="on-stock"> Stock Available</p>
+                      )}
+                    </p>
+                    <p>{productItem.category}</p>
+                    <p>Rs. {productItem.price} /-</p>
+                    <button
+                      onClick={() => handleAddToCart(productItem)}
+                      disabled={productItem.Quantity === 0}
+                      className={
+                        clickedButtons.includes(productItem.id) ? "clicked" : ""
+                      }
+                    >
+                      {clickedButtons.includes(productItem.id)
+                        ? "Added"
+                        : "Add To Cart"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
-      </div>
+      )}
+
       <div id="Contact">
         <Footer />
       </div>

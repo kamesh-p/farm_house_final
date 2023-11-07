@@ -13,11 +13,11 @@ const authSlice = createSlice({
     login(state, action) {
       state.isLoggedIn = true;
       console.log("action dispatched");
-      state.loggedInUserName = action.payload;
+      // state.loggedInUserName = action.payload;
     },
     logout(state) {
       state.isLoggedIn = false;
-      state.loggedInUser = "";
+      // state.loggedInUser = "";
     },
     setAllowedUsers: (state, action) => {
       state.allowedUsers = action.payload;

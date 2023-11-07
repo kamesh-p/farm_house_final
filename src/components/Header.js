@@ -11,7 +11,9 @@ import Kamesh from "../Assert/Kamesh.png";
 import Prakash from "../Assert/Prakash.png";
 import FeedbackForm from "./FeedBack";
 import { AuthContext } from "../contexts/logUser";
-const Header = ({ handleRouteChange, count }) => {
+import "@fortawesome/fontawesome-free/css/all.css";
+import cartIcon from "../Assert/basket-cart-icon.png";
+const Header = ({ handleRouteChange, count, cartAnimation }) => {
   const [showCart, setShowCart] = useState(false);
   const [showShop, setShowShop] = useState(false);
   const [showHomeDropdown, setShowHomeDropdown] = useState(false);
@@ -39,7 +41,7 @@ const Header = ({ handleRouteChange, count }) => {
     } else if (loggedInUserName === "Kamesh") {
       return Kamesh;
     } else {
-      return null;
+      return loggedInUserName;
     }
   };
 
@@ -154,7 +156,7 @@ const Header = ({ handleRouteChange, count }) => {
   return (
     <header className="header">
       <div className="header-left">
-        <Link to="/admin">
+        <Link to="/">
           <img src={logo} alt="Logo" className="logo" />
         </Link>
         <h1 className="company-name">FarmHouse</h1>
@@ -168,7 +170,7 @@ const Header = ({ handleRouteChange, count }) => {
           >
             <div className="dropdown">
               <Link
-                to="/admin"
+                to="/"
                 onClick={handleShoppingAppClick}
                 onMouseEnter={() => handleLinkClick("Home")}
                 className="header-link"
@@ -241,8 +243,13 @@ const Header = ({ handleRouteChange, count }) => {
           </li>
           <li>
             <Link to="/admin/cart" className="header-link">
-              Cart
               {count > 0 && <sup>{count}</sup>}
+              <img
+                src={cartIcon}
+                alt="Cart"
+                className={`cart-icon ${cartAnimation ? "cart-animation" : ""}`}
+                onClick={() => handleShowCart(true)}
+              />
             </Link>
           </li>
           <li>

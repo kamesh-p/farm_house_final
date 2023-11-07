@@ -80,20 +80,20 @@ const Combo = ({ addToCart }) => {
     console.log("Filtered product array:", filteredProductArray);
   }, [product, requiredProtein]);
 
-  //   const handleButtonClick = (name) => {
-  //     // Toggle the clicked button state
-  //     setFilteredProductArray((prevState) =>
-  //       prevState.map((productItem) => {
-  //         if (productItem.name === name) {
-  //           return {
-  //             ...productItem,
-  //             clicked: !productItem.clicked,
-  //           };
-  //         }
-  //         return productItem;
-  //       })
-  //     );
-  //   };
+  // const handleButtonClick = (name) => {
+  //   // Toggle the clicked button state
+  //   setFilteredProductArray((prevState) =>
+  //     prevState.map((productItem) => {
+  //       if (productItem.name === name) {
+  //         return {
+  //           ...productItem,
+  //           clicked: !productItem.clicked,
+  //         };
+  //       }
+  //       return productItem;
+  //     })
+  //   );
+  // };
 
   // Function to handle button click
   const handleAddToCart = (productItem) => {

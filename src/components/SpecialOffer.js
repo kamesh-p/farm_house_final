@@ -254,9 +254,15 @@ const SpecialOffer = ({ addToCart }) => {
             </div>
           </div>
           <ul>
-            <li>Monthly Subscription - 10% off</li>
-            <li>Quarterly Subscription - 15% off</li>
-            <li>Yearly Subscription - 20% off</li>
+            <li className="li-special-offer-timeout">
+              Monthly Subscription - 10% off
+            </li>
+            <li className="li-special-offer-timeout">
+              Quarterly Subscription - 15% off
+            </li>
+            <li className="li-special-offer-timeout">
+              Yearly Subscription - 20% off
+            </li>
           </ul>
         </div>
       </div>
